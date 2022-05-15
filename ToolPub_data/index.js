@@ -1,5 +1,5 @@
 require('dotenv').config()
-const moment = require('moment')
+var moment = require('moment-timezone');
 const mqtt = require('mqtt')
 const host = process.env.MQTT_HOST
 const port = process.env.MQTT_PORT
@@ -46,7 +46,7 @@ const public = () => {
            {"operatingState": "STARTING"},
            {"VoltRef": 380}
            ],
-        "timeStamp": ${moment().format('YYYY-MM-DD HH:mm:ssss')}
+        "timeStamp": ${moment().tz('Asia/Ho_Chi_Minh').format('YYYY-MM-DD HH:mm:ssss')}
         }`
     console.log('Start Public Data to Broker!!!!!')
     client.publish(topic, iot_data, { qos: 0, retain: false }, (error) => {
